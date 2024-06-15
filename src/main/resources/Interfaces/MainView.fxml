@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.MainViewController" spacing="10" alignment="CENTER" prefHeight="730" prefWidth="337">
+<VBox alignment="CENTER" prefHeight="730" prefWidth="337" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainViewController">
     <children>
-        <Label fx:id="stepLabel" />
-        <ImageView fx:id="itemImageView" fitHeight="200" fitWidth="200" />
-        <Label fx:id="itemNameLabel" />
-        <Label fx:id="itemPriceLabel" />
-        <HBox alignment="CENTER" spacing="10">
-            <Button text="Previous" onAction="#handlePreviousItem" />
-            <Button text="Next" onAction="#handleNextItem" />
-            <Button text="Add to Cart" onAction="#handleAddToCart" />
-        </HBox>
+      <BorderPane prefHeight="730.0" prefWidth="337.0">
+         <left>
+               <Button onAction="#handlePreviousItem" text="&lt;" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+               <Button onAction="#handleNextItem" text="&gt;" BorderPane.alignment="CENTER" />
+         </right>
+         <top>
+              <Label fx:id="stepLabel" text="Select Main Item" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+               <Button onAction="#handleAddToCart" text="Add to Cart" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                    <ImageView fx:id="itemImageView" fitHeight="230.0" fitWidth="500.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/DoubleKrustyBurgerWCheese.png" />
+                     </image>
+                  </ImageView>
+                    <Label fx:id="itemNameLabel" text="Double Krusty Burger" />
+                    <Label fx:id="itemPriceLabel" text="\$4.99" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
     </children>
 </VBox>

@@ -20,21 +20,22 @@ public class MainViewController {
     private Label itemPriceLabel;
 
     private MainItem[] mainItems = {
-            new MainItem("Burger", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new MainItem("Pizza", 8.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new MainItem("Salad", 4.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+            new MainItem("Krusty Burger w/Cheese", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new MainItem("Double Krusty Burger w/Cheese", 8.99, new Image(getClass().getResource("/Images/DoubleKrustyBurgerWCheese.png").toString())),
+            new MainItem("Ribwich", 4.99, new Image(getClass().getResource("/Images/Ribwich.png").toString())),
+            new MainItem("Mother Nature Burger", 4.99, new Image(getClass().getResource("/Images/MotherNatureBurger.png").toString()))
     };
 
     private SideItem[] sideItems = {
-            new SideItem("Fries", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new SideItem("Onion Rings", 3.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new SideItem("Salad", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+            new SideItem("Fries", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new SideItem("Onion Rings", 3.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new SideItem("Salad", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString()))
     };
 
     private DrinkItem[] drinkItems = {
-            new DrinkItem("Soda", 1.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new DrinkItem("Juice", 2.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
-            new DrinkItem("Water", 0.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+            new DrinkItem("Soda", 1.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new DrinkItem("Juice", 2.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new DrinkItem("Water", 0.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString()))
     };
 
     private int mainItemIndex;
