@@ -1,6 +1,7 @@
 module com.example.krustyburgerapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.krustyburgerapp to javafx.fxml;

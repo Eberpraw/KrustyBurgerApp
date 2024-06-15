@@ -1,110 +1,133 @@
 package Controllers;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import Model.Cart;
 import Model.DrinkItem;
 import Model.MainItem;
 import Model.SideItem;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class ItemsController {
-    @FXML
-    private ComboBox<MainItem> mainItemComboBox;
-    @FXML
-    private ComboBox<SideItem> sideItemComboBox;
-    @FXML
-    private ComboBox<DrinkItem> drinkItemComboBox;
-    @FXML
-    private TextArea cartTextArea;
+public class MainViewController {
     @FXML
     private Label stepLabel;
+    @FXML
+    private ImageView itemImageView;
+    @FXML
+    private Label itemNameLabel;
+    @FXML
+    private Label itemPriceLabel;
+
+    private MainItem[] mainItems = {
+            new MainItem("Burger", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new MainItem("Pizza", 8.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new MainItem("Salad", 4.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+    };
+
+    private SideItem[] sideItems = {
+            new SideItem("Fries", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new SideItem("Onion Rings", 3.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new SideItem("Salad", 2.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+    };
+
+    private DrinkItem[] drinkItems = {
+            new DrinkItem("Soda", 1.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new DrinkItem("Juice", 2.49, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString())),
+            new DrinkItem("Water", 0.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.jpeg").toString()))
+    };
+
+    private int mainItemIndex;
+    private int sideItemIndex;
+    private int drinkItemIndex;
 
     private Cart cart;
-    private int step;
 
-    @FXML
     public void initialize() {
+        mainItemIndex = 0;
+        sideItemIndex = 0;
+        drinkItemIndex = 0;
         cart = new Cart();
-        step = 1;
 
-        ObservableList<MainItem> mainItems = FXCollections.observableArrayList(
-                new MainItem("Burger", 5.99, new Image("file:images/burger.png")),
-                new MainItem("Pizza", 8.99, new Image("file:images/pizza.png")),
-                new MainItem("Salad", 4.99, new Image("file:images/salad.png"))
-        );
-
-        ObservableList<SideItem> sideItems = FXCollections.observableArrayList(
-                new SideItem("Fries", 2.99, new Image("file:images/fries.png")),
-                new SideItem("Onion Rings", 3.49, new Image("file:images/onion_rings.png")),
-                new SideItem("Salad", 2.99, new Image("file:images/salad.png"))
-        );
-
-        ObservableList<DrinkItem> beverageItems = FXCollections.observableArrayList(
-                new DrinkItem("Soda", 1.99, new Image("file:images/soda.png")),
-                new DrinkItem("Juice", 2.49, new Image("file:images/juice.png")),
-                new DrinkItem("Water", 0.99, new Image("file:images/water.png"))
-        );
-
-        mainItemComboBox.setItems(mainItems);
-        sideItemComboBox.setItems(sideItems);
-        drinkItemComboBox.setItems(beverageItems);
-
-        sideItemComboBox.setVisible(false);
-        drinkItemComboBox.setVisible(false);
+        showCurrentMainItem();
+        stepLabel.setText("Select Main Item:");
     }
+
+    private void showCurrentMainItem() {
+        MainItem currentItem = mainItems[mainItemIndex];
+        itemNameLabel.setText(currentItem.getName());
+        itemPriceLabel.setText("$" + currentItem.getPrice());
+        itemImageView.setImage(currentItem.getImage());
+    }
+
+    private void showCurrentSideItem() {
+        SideItem currentItem = sideItems[sideItemIndex];
+        itemNameLabel.setText(currentItem.getName());
+        itemPriceLabel.setText("$" + currentItem.getPrice());
+        itemImageView.setImage(currentItem.getImage());
+    }
+
+    private void showCurrentDrinkItem() {
+        DrinkItem currentItem = drinkItems[drinkItemIndex];
+        itemNameLabel.setText(currentItem.getName());
+        itemPriceLabel.setText("$" + currentItem.getPrice());
+        itemImageView.setImage(currentItem.getImage());
+    }
+
     @FXML
-    private void handleNextStep() {
-        switch (step) {
-            case 1:
-                if (mainItemComboBox.getValue() != null) {
-                    cart.addItem(mainItemComboBox.getValue());
-                    mainItemComboBox.setDisable(true);
-                    sideItemComboBox.setVisible(true);
-                    stepLabel.setText("Select a Side Item:");
-                    step++;
-                }
-                break;
-            case 2:
-                if (sideItemComboBox.getValue() != null) {
-                    cart.addItem(sideItemComboBox.getValue());
-                    sideItemComboBox.setDisable(true);
-                    drinkItemComboBox.setVisible(true);
-                    stepLabel.setText("Select a Beverage Item:");
-                    step++;
-                }
-                break;
-            case 3:
-                if (drinkItemComboBox.getValue() != null) {
-                    cart.addItem(drinkItemComboBox.getValue());
-                    showCartView();
-                }
-                break;
+    private void handleNextItem() {
+        if (stepLabel.getText().equals("Select Main Item:")) {
+            // Move to the next main item
+            mainItemIndex = (mainItemIndex + 1) % mainItems.length;
+            showCurrentMainItem();
+        } else if (stepLabel.getText().equals("Select Side Item:")) {
+            // Move to the next side item
+            sideItemIndex = (sideItemIndex + 1) % sideItems.length;
+            showCurrentSideItem();
+        } else if (stepLabel.getText().equals("Select Drink Item:")) {
+            // Move to the next drink item
+            drinkItemIndex = (drinkItemIndex + 1) % drinkItems.length;
+            showCurrentDrinkItem();
         }
     }
 
-    private void showCartView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CartView.fxml"));
-            VBox cartView = loader.load();
+    @FXML
+    private void handlePreviousItem() {
+        if (stepLabel.getText().equals("Select Main Item:")) {
+            // Move to the previous main item
+            mainItemIndex = (mainItemIndex - 1 + mainItems.length) % mainItems.length;
+            showCurrentMainItem();
+        } else if (stepLabel.getText().equals("Select Side Item:")) {
+            // Move to the previous side item
+            sideItemIndex = (sideItemIndex - 1 + sideItems.length) % sideItems.length;
+            showCurrentSideItem();
+        } else if (stepLabel.getText().equals("Select Drink Item:")) {
+            // Move to the previous drink item
+            drinkItemIndex = (drinkItemIndex - 1 + drinkItems.length) % drinkItems.length;
+            showCurrentDrinkItem();
+        }
+    }
 
-            CartViewController controller = loader.getController();
-            controller.setCart(cart);
-
-            Stage stage = (Stage) cartTextArea.getScene().getWindow();
-            stage.setScene(new Scene(cartView));
-        } catch (IOException e) {
-            e.printStackTrace();
+    @FXML
+    private void handleAddToCart() {
+        if (stepLabel.getText().equals("Select Main Item:")) {
+            // Add selected main item to cart
+            MainItem selectedItem = mainItems[mainItemIndex];
+            cart.addItem(selectedItem);
+            stepLabel.setText("Select Side Item:");
+            showCurrentSideItem(); // Show initial side item after main item selection
+        } else if (stepLabel.getText().equals("Select Side Item:")) {
+            // Add selected side item to cart
+            SideItem selectedItem = sideItems[sideItemIndex];
+            cart.addItem(selectedItem);
+            stepLabel.setText("Select Drink Item:");
+            showCurrentDrinkItem(); // Show initial drink item after side item selection
+        } else if (stepLabel.getText().equals("Select Drink Item:")) {
+            // Add selected drink item to cart
+            DrinkItem selectedItem = drinkItems[drinkItemIndex];
+            cart.addItem(selectedItem);
+            stepLabel.setText("Review and Add to Cart:");
         }
     }
 }
+
