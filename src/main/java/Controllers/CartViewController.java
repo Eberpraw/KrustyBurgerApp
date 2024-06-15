@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import Model.Cart;
 import Model.Items;
@@ -13,7 +14,11 @@ import java.io.IOException;
 
 public class CartViewController {
     @FXML
-    private TextArea cartTextArea;
+    private Text cartTextArea;
+    @FXML
+    private Text cartPriceArea;
+    @FXML
+    private Text cartTotalPrice;
 
     private Cart cart;
 
@@ -23,11 +28,18 @@ public class CartViewController {
     }
 
     private void displayCartContents() {
-        cartTextArea.clear();
+        StringBuilder cartContents = new StringBuilder();
+        StringBuilder cartPrice = new StringBuilder();
+        StringBuilder cartTotal = new StringBuilder();
         for (Items items : cart.getItems()) {
-            cartTextArea.appendText(items + "\n");
+            // Append item name and price separately
+            cartContents.append("").append(items.getName()).append("\n");
+            cartPrice.append("$").append(items.getPrice()).append("\n");
         }
-        cartTextArea.appendText("Total: $" + cart.getTotalPrice());
+        cartTotal.append("\nTotal: $").append(cart.getTotalPrice());
+        cartTextArea.setText(cartContents.toString());
+        cartPriceArea.setText(cartPrice.toString());
+        cartTotalPrice.setText(cartTotal.toString());
     }
 
     @FXML

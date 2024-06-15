@@ -1,6 +1,13 @@
 package Controllers;
 
+import javafx.collections.transformation.TransformationList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,6 +15,9 @@ import Model.Cart;
 import Model.DrinkItem;
 import Model.MainItem;
 import Model.SideItem;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainViewController {
     @FXML
@@ -18,10 +28,14 @@ public class MainViewController {
     private Label itemNameLabel;
     @FXML
     private Label itemPriceLabel;
+    @FXML
+    private Button addToCartButton;
+    @FXML
+    private Button goToCartButton;
 
     private MainItem[] mainItems = {
-            new MainItem("Krusty Burger w/Cheese", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
-            new MainItem("Double Krusty Burger w/Cheese", 8.99, new Image(getClass().getResource("/Images/DoubleKrustyBurgerWCheese.png").toString())),
+            new MainItem("Krusty Burger", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
+            new MainItem("Double Krusty Burger", 8.99, new Image(getClass().getResource("/Images/DoubleKrustyBurgerWCheese.png").toString())),
             new MainItem("Ribwich", 4.99, new Image(getClass().getResource("/Images/Ribwich.png").toString())),
             new MainItem("Mother Nature Burger", 4.99, new Image(getClass().getResource("/Images/MotherNatureBurger.png").toString()))
     };
@@ -52,6 +66,10 @@ public class MainViewController {
 
         showCurrentMainItem();
         stepLabel.setText("Select Main Item:");
+
+        addToCartButton.setVisible(true);
+        goToCartButton.setVisible(false);
+        goToCartButton.setOnAction(this::openCartView);
     }
 
     private void showCurrentMainItem() {
@@ -127,7 +145,24 @@ public class MainViewController {
             // Add selected drink item to cart
             DrinkItem selectedItem = drinkItems[drinkItemIndex];
             cart.addItem(selectedItem);
-            stepLabel.setText("Review and Add to Cart:");
+            addToCartButton.setVisible(false);
+            goToCartButton.setVisible(true);
+        }
+    }
+    public void openCartView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/CartView.fxml"));
+            Parent newSceneParent = loader.load();
+            Scene newScene = new Scene(newSceneParent);
+
+            CartViewController controller = loader.getController();
+            controller.setCart(cart);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(newScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
