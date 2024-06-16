@@ -9,42 +9,65 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="730" prefWidth="337" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainViewController">
+<VBox alignment="CENTER" prefHeight="730" prefWidth="337" stylesheets="@/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainViewController">
     <children>
       <BorderPane prefHeight="730.0" prefWidth="337.0">
          <left>
-               <Button onAction="#handlePreviousItem" text="&lt;" BorderPane.alignment="CENTER" />
+               <Button fx:id="previousItemButton" onAction="#handlePreviousItem" styleClass="circleButton" BorderPane.alignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../Images/Arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </left>
          <right>
-               <Button onAction="#handleNextItem" text="&gt;" BorderPane.alignment="CENTER" />
+               <Button fx:id="nextItemButton" onAction="#handleNextItem" styleClass="circleButton" BorderPane.alignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </right>
          <top>
-              <Label fx:id="stepLabel" text="Select Main Item" textAlignment="CENTER" BorderPane.alignment="CENTER">
+              <Label fx:id="stepLabel" styleClass="text" text="Select Main Item" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="30.0" />
                </BorderPane.margin>
                <font>
-                  <Font size="15.0" />
+                  <Font size="16.0" />
                </font></Label>
          </top>
          <center>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                    <ImageView fx:id="itemImageView" fitHeight="230.0" fitWidth="500.0" preserveRatio="true">
+                    <ImageView fx:id="itemImageView" fitHeight="230.0" fitWidth="500.0" preserveRatio="true" styleClass="imageShadow">
                      <image>
                         <Image url="@../Images/DoubleKrustyBurgerWCheese.png" />
                      </image>
                   </ImageView>
-                    <Label fx:id="itemNameLabel" text="Double Krusty Burger" />
-                    <Label fx:id="itemPriceLabel" text="\$4.99" />
+                    <Label fx:id="itemNameLabel" styleClass="text" text="Double Krusty &#10;Burger" textAlignment="CENTER">
+                     <font>
+                        <Font size="32.0" />
+                     </font></Label>
+                    <Label fx:id="itemPriceLabel" styleClass="text" text="\$4.99">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
          </center>
          <bottom>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="70.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="addToCartButton" onAction="#handleAddToCart" text="Add to Cart" />
-                  <Button fx:id="goToCartButton" layoutX="138.0" layoutY="98.0" onAction="#openCartView" text="Go to Cart" />
+                  <Button fx:id="goToCartButton" layoutX="138.0" layoutY="98.0" onAction="#openCartView" text="Go to Cart" translateY="10.0" />
+                  <Button fx:id="addToCartButton" onAction="#handleAddToCart" text="Add to Cart" translateY="-25.0" />
                </children>
             </VBox>
          </bottom>
