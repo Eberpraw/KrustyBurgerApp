@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Animations;
+import Model.SFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,8 @@ public class AppController {
     Font titleFont;
     Font smallTitleFont;
 
+    SFX sfx = new SFX();
+
     @FXML
     public void initialize() {
         titleFont = Font.loadFont(getClass().getResource("/Fonts/Alphakind.ttf").toExternalForm(), 75);
@@ -45,10 +48,14 @@ public class AppController {
 
         // Load Animation Class
         Animations.buttonAnimation(startButton);
+
+        // Start Sound Effect
+        sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
     }
 
     @FXML
     public void changeScene(ActionEvent event) throws IOException {
+        sfx.playSoundEffect("AudioFiles/HeyHey.wav");
         Parent newSceneParent = FXMLLoader.load(getClass().getResource("/Interfaces/MainView.fxml"));
         Scene newScene = new Scene(newSceneParent);
         // This line gets the Stage information

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Animations;
+import Model.SFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,8 @@ public class CartViewController {
     private Button completePurchase;
 
     private Cart cart;
+
+    SFX sfx = new SFX();
 
     public void setCart(Cart cart) {
         this.cart = cart;
@@ -70,6 +73,7 @@ public class CartViewController {
 
     @FXML
     private void handleBackToMainView(ActionEvent event) throws IOException {
+        sfx.playSoundEffect("AudioFiles/GetLost.wav");
         Parent newSceneParent = FXMLLoader.load(getClass().getResource("/Interfaces/MainView.fxml"));
         Scene newScene = new Scene(newSceneParent);
         // This line gets the Stage information
@@ -81,6 +85,7 @@ public class CartViewController {
 
     @FXML
     public void goToReceipt(ActionEvent event) throws IOException {
+        sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
         Parent newSceneParent = FXMLLoader.load(getClass().getResource("/Interfaces/ReceiptView.fxml"));
         Scene newScene = new Scene(newSceneParent);
         // This line gets the Stage information

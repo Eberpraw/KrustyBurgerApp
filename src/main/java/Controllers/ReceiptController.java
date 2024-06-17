@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Animations;
+import Model.SFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ReceiptController {
+
     private String receipt;
 
     private static int orderNumber = 0;
@@ -23,6 +25,8 @@ public class ReceiptController {
 
     @FXML
     private Button exitButton;
+
+    SFX sfx = new SFX();
 
     public void printReceipt() {
         if (orderNumber >= 99) {
@@ -34,13 +38,14 @@ public class ReceiptController {
     }
 
     public void initialize() {
-
+        sfx.playSoundEffect("AudioFiles/krusty-the-clown.wav");
         printReceipt();
         Animations.buttonAnimation(exitButton);
     }
 
     @FXML
     public void exitOrder(ActionEvent event) throws IOException {
+        sfx.stopSoundEffect();
         Parent newSceneParent = FXMLLoader.load(getClass().getResource("/Interfaces/AppView.fxml"));
         Scene newScene = new Scene(newSceneParent);
         // This line gets the Stage information

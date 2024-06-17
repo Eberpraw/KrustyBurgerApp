@@ -34,6 +34,8 @@ public class MainViewController {
     @FXML
     private Button previousItemButton;
 
+    SFX sfx = new SFX();
+
     private MainItem[] mainItems = {
             new MainItem("Krusty Burger", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
             new MainItem("Double Krusty Burger", 8.99, new Image(getClass().getResource("/Images/DoubleKrustyBurgerWCheese.png").toString())),
@@ -105,6 +107,7 @@ public class MainViewController {
 
     @FXML
     private void handleNextItem() {
+        sfx.playSoundEffect("AudioFiles/ButtonClick.wav");
         if (stepLabel.getText().equals("Select Main Item")) {
             // Move to the next main item
             mainItemIndex = (mainItemIndex + 1) % mainItems.length;
@@ -122,6 +125,7 @@ public class MainViewController {
 
     @FXML
     private void handlePreviousItem() {
+        sfx.playSoundEffect("AudioFiles/ButtonClick.wav");
         if (stepLabel.getText().equals("Select Main Item")) {
             // Move to the previous main item
             mainItemIndex = (mainItemIndex - 1 + mainItems.length) % mainItems.length;
@@ -139,6 +143,7 @@ public class MainViewController {
 
     @FXML
     private void handleAddToCart() {
+        sfx.playSoundEffect("AudioFiles/chaching.wav");
         if (stepLabel.getText().equals("Select Main Item")) {
             // Add selected main item to cart
             MainItem selectedItem = mainItems[mainItemIndex];
@@ -161,6 +166,7 @@ public class MainViewController {
     }
     public void openCartView(ActionEvent event) {
         try {
+            sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/CartView.fxml"));
             Parent newSceneParent = loader.load();
             Scene newScene = new Scene(newSceneParent);
@@ -172,6 +178,7 @@ public class MainViewController {
             window.setScene(newScene);
             window.show();
         } catch (IOException e) {
+            sfx.playSoundEffect("AudioFiles/Crap.wav");
             e.printStackTrace();
         }
     }
