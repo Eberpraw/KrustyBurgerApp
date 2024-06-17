@@ -12,6 +12,14 @@ public class SFX {
 
     private Clip currentClip;
 
+    /**
+     * This method is used to play a sound effect.
+     *
+     * @param soundFileName The name of the sound file to play. This should be a .wav file located in the resources directory.
+     * @throws UnsupportedAudioFileException If the audio file format is not supported.
+     * @throws IOException If an I/O error occurs.
+     * @throws LineUnavailableException If a line cannot be opened because it is unavailable.
+     */
     public void playSoundEffect(String soundFileName) {
         try {
             // Get the sound file as a resource
@@ -33,6 +41,10 @@ public class SFX {
         }
     }
 
+    /**
+     * This method is used to stop the currently playing sound effect.
+     * It checks if there is a clip currently playing, and if so, stops it.
+     */
     public void stopSoundEffect() {
         if (currentClip != null && currentClip.isRunning()) {
             currentClip.stop();

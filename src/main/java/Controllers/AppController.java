@@ -53,6 +53,13 @@ public class AppController {
         sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
     }
 
+    /**
+     * This method is used to change the scene to the Main view.
+     * It plays a sound effect, loads the MainView.fxml file, and sets the scene on the current window.
+     *
+     * @param event The action event that triggered this method.
+     * @throws IOException If an input or output exception occurred.
+     */
     @FXML
     public void changeScene(ActionEvent event) throws IOException {
         sfx.playSoundEffect("AudioFiles/HeyHey.wav");

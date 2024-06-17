@@ -9,10 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import Model.Cart;
@@ -38,11 +36,25 @@ public class CartViewController {
 
     SFX sfx = new SFX();
 
+    /**
+     * This method is used to set the cart and display its contents.
+     * It assigns the provided Cart object to the cart field and then calls the displayCartContents method.
+     *
+     * @param cart The Cart object to be set.
+     */
     public void setCart(Cart cart) {
         this.cart = cart;
         displayCartContents();
     }
 
+    /**
+     * This method is used to display the contents of the cart.
+     * It creates an HBox for item images, and StringBuilder objects for cart contents, prices, and total price.
+     * It then iterates over the items in the cart, appending each item's name and price to the respective StringBuilder,
+     * and adding an ImageView of each item to the imageBox.
+     * Finally, it sets the text of the cartTextArea, cartPriceArea, and cartTotalPrice to the respective StringBuilder contents,
+     * and adds the imageBox to the productImages HBox.
+     */
     private void displayCartContents() {
         HBox imageBox = new HBox();
         imageBox.setSpacing(-10);
@@ -71,6 +83,13 @@ public class CartViewController {
         Animations.buttonAnimation(completePurchase);
     }
 
+    /**
+     * This method is used to navigate back to the Main view.
+     * It plays a sound effect, loads the MainView.fxml file, and sets the scene on the current window.
+     *
+     * @param event The action event that triggered this method.
+     * @throws IOException If an input or output exception occurred.
+     */
     @FXML
     private void handleBackToMainView(ActionEvent event) throws IOException {
         sfx.playSoundEffect("AudioFiles/GetLost.wav");
@@ -83,6 +102,13 @@ public class CartViewController {
     }
 
 
+    /**
+     * This method is used to navigate to the Receipt view.
+     * It plays a sound effect, loads the ReceiptView.fxml file, and sets the scene on the current window.
+     *
+     * @param event The action event that triggered this method.
+     * @throws IOException If an input or output exception occurred.
+     */
     @FXML
     public void goToReceipt(ActionEvent event) throws IOException {
         sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");

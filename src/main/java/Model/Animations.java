@@ -5,6 +5,13 @@ import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 public class Animations {
+
+    /**
+     * This method is used to animate a button with a scale transition.
+     * The button scales up and down when pressed.
+     *
+     * @param button The button to animate.
+     */
     public static void buttonAnimation(Button button) {
         // Create a scale transition
         ScaleTransition st = new ScaleTransition(Duration.millis(100), button);

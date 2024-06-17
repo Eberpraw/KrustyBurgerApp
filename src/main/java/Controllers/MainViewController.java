@@ -76,6 +76,10 @@ public class MainViewController {
 
         addToCartButton.setVisible(true);
         goToCartButton.setVisible(false);
+        /**
+         * Sets the action to be invoked when this button is pressed.
+         * The `openCartView` method will be called when the `goToCartButton` is clicked.
+         */
         goToCartButton.setOnAction(this::openCartView);
 
         Animations.buttonAnimation(addToCartButton);
@@ -84,6 +88,10 @@ public class MainViewController {
         Animations.buttonAnimation(previousItemButton);
     }
 
+    /**
+     * This method is used to display the current main item in the selection process.
+     * It sets the name, price, and image of the current main item to the respective labels and ImageView.
+     */
     private void showCurrentMainItem() {
         MainItem currentItem = mainItems[mainItemIndex];
         itemNameLabel.setText(currentItem.getName());
@@ -91,6 +99,10 @@ public class MainViewController {
         itemImageView.setImage(currentItem.getImage());
     }
 
+    /**
+     * This method is used to display the current side item in the selection process.
+     * It sets the name, price, and image of the current side item to the respective labels and ImageView.
+     */
     private void showCurrentSideItem() {
         SideItem currentItem = sideItems[sideItemIndex];
         itemNameLabel.setText(currentItem.getName());
@@ -98,6 +110,10 @@ public class MainViewController {
         itemImageView.setImage(currentItem.getImage());
     }
 
+    /**
+     * This method is used to display the current drink item in the selection process.
+     * It sets the name, price, and image of the current drink item to the respective labels and ImageView.
+     */
     private void showCurrentDrinkItem() {
         DrinkItem currentItem = drinkItems[drinkItemIndex];
         itemNameLabel.setText(currentItem.getName());
@@ -105,6 +121,13 @@ public class MainViewController {
         itemImageView.setImage(currentItem.getImage());
     }
 
+    /**
+     * This method handles the action of moving to the next item in the selection process.
+     * It plays a sound effect and checks the current selection step.
+     * If the step is "Select Main Item", it moves to the next main item and displays it.
+     * If the step is "Select Side Item", it moves to the next side item and displays it.
+     * If the step is "Select Drink Item", it moves to the next drink item and displays it.
+     */
     @FXML
     private void handleNextItem() {
         sfx.playSoundEffect("AudioFiles/ButtonClick.wav");
@@ -123,6 +146,13 @@ public class MainViewController {
         }
     }
 
+    /**
+     * This method handles the action of moving to the previous item in the selection process.
+     * It plays a sound effect and checks the current selection step.
+     * If the step is "Select Main Item", it moves to the previous main item and displays it.
+     * If the step is "Select Side Item", it moves to the previous side item and displays it.
+     * If the step is "Select Drink Item", it moves to the previous drink item and displays it.
+     */
     @FXML
     private void handlePreviousItem() {
         sfx.playSoundEffect("AudioFiles/ButtonClick.wav");
@@ -141,6 +171,13 @@ public class MainViewController {
         }
     }
 
+    /**
+     * This method handles the action of adding items to the cart.
+     * It plays a sound effect and checks the current selection step.
+     * If the step is "Select Main Item", it adds the selected main item to the cart and updates the step to "Select Side Item".
+     * If the step is "Select Side Item", it adds the selected side item to the cart and updates the step to "Select Drink Item".
+     * If the step is "Select Drink Item", it adds the selected drink item to the cart and makes the "Go to Cart" button visible.
+     */
     @FXML
     private void handleAddToCart() {
         sfx.playSoundEffect("AudioFiles/chaching.wav");
@@ -164,6 +201,12 @@ public class MainViewController {
             goToCartButton.setVisible(true);
         }
     }
+
+    /**
+     * This method handles the action of opening the cart view.
+     * It plays a sound effect and loads the CartView.fxml file to display the cart contents.
+     * @param event The ActionEvent object generated when the "Go to Cart" button is clicked.
+     */
     public void openCartView(ActionEvent event) {
         try {
             sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
