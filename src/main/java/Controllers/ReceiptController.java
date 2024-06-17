@@ -28,6 +28,11 @@ public class ReceiptController {
 
     SFX sfx = new SFX();
 
+    /**
+     * This method is used to print the receipt for an order.
+     * It increments the order number by one each time a receipt is printed, resetting to zero when it reaches 99.
+     * The order number is then displayed on the orderNumberText Text object, prefixed with a '#'.
+     */
     public void printReceipt() {
         if (orderNumber >= 99) {
             orderNumber = 0;
@@ -43,6 +48,15 @@ public class ReceiptController {
         Animations.buttonAnimation(exitButton);
     }
 
+    /**
+     * This method is used to handle the action event of exiting an order.
+     * It stops any sound effect that is currently playing, loads a new scene from the 'AppView.fxml' file,
+     * and sets this new scene on the current stage.
+     *
+     * @param event An ActionEvent which indicates that a set action occurred on a node.
+     * This event is used to get the source of the event, which is then used to get the current stage.
+     * @throws IOException If an I/O error occurs during loading the FXML file.
+     */
     @FXML
     public void exitOrder(ActionEvent event) throws IOException {
         sfx.stopSoundEffect();

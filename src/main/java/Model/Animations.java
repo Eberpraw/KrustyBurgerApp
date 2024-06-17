@@ -23,10 +23,24 @@ public class Animations {
         // Create a flag to indicate whether the animation has finished
         final boolean[] animationFinished = {true};
 
-        // Set a handler that is called when the animation has finished
+        /**
+         * Sets an event handler to be called when the animation has finished.
+         * The event handler is represented by a lambda expression that sets the first element of the animationFinished array to true.
+         * This indicates that the animation has completed.
+         *
+         * @param event An ActionEvent which indicates that a set action occurred on a node.
+         * This event is passed to the lambda expression, which doesn't use it in this case.
+         */
         st.setOnFinished(event -> animationFinished[0] = true);
 
-        // Set the mouse pressed event
+        /**
+         * Sets an event handler to be called when the button is pressed.
+         * The event handler is represented by a lambda expression that checks if the animation has finished.
+         * If it has, it sets animationFinished[0] to false and starts the animation from the beginning.
+         *
+         * @param event A MouseEvent which indicates that a mouse action occurred on a node.
+         * This event is passed to the lambda expression, which doesn't use it in this case.
+         */
         button.setOnMousePressed(event -> {
             if (animationFinished[0]) {
                 animationFinished[0] = false;

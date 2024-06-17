@@ -76,11 +76,6 @@ public class MainViewController {
 
         addToCartButton.setVisible(true);
         goToCartButton.setVisible(false);
-        /**
-         * Sets the action to be invoked when this button is pressed.
-         * The `openCartView` method will be called when the `goToCartButton` is clicked.
-         */
-        goToCartButton.setOnAction(this::openCartView);
 
         Animations.buttonAnimation(addToCartButton);
         Animations.buttonAnimation(goToCartButton);

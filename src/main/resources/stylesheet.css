@@ -46,10 +46,9 @@
 
 .buttonSimpleStyle {
     -fx-background-color: none;
-    -fx-min-width: 250px;
+    -fx-max-height: 5px;
     -fx-text-fill: #66310e;
     -fx-font-family: "fantasy";
     -fx-font-size: 16px;
     -fx-font-weight: 900;
-    -fx-background-radius: 20em;
 }

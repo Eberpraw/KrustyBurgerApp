@@ -16,6 +16,7 @@ public class MainItem extends Items {
      * @param image the image of the main item
      */
     public MainItem(String name, double price, Image image) {
+
         super(name, price, image);
     }
 }
