@@ -42,6 +42,11 @@ public class Cart {
      * @return the total price of all items in the cart
      */
     public double getTotalPrice() {
-        return items.stream().mapToDouble(Items::getPrice).sum();
+
+        double total = 0;
+        for (Items item : items) {
+            total += item.getPrice();
+        }
+        return total;
     }
 }
