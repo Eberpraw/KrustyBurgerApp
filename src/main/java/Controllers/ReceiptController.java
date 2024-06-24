@@ -16,16 +16,20 @@ import java.io.IOException;
 
 public class ReceiptController {
 
-    private String receipt;
-
+    // This means that the orderNumber variable is not tied to an
+    // individual instance of the ReceiptController class. Instead,
+    // there's only one orderNumber for all instances of ReceiptController.
+    // So, if you increment orderNumber in one instance,
+    // the change is reflected in all other instances as well.
     private static int orderNumber = 0;
 
     @FXML
-    private Text orderNumberText;
+    Text orderNumberText;
 
     @FXML
     private Button exitButton;
 
+    // Create an instance variable of the SFX class and initialize it
     SFX sfx = new SFX();
 
     /**

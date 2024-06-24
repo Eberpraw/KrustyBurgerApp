@@ -16,6 +16,7 @@ public class SideItem extends Items{
      * @param image the image of the main item
      */
     public SideItem(String name, double price, Image image) {
-        super(name, price, image);
+
+        super(name, price, image); // We use super to call the constructor of the Items class
     }
 }

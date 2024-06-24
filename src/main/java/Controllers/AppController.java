@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -28,6 +27,7 @@ public class AppController {
     Font titleFont;
     Font smallTitleFont;
 
+    // Create an instance variable of the SFX class
     SFX sfx = new SFX();
 
     @FXML
@@ -65,7 +65,7 @@ public class AppController {
         sfx.playSoundEffect("AudioFiles/HeyHey.wav");
         Parent newSceneParent = FXMLLoader.load(getClass().getResource("/Interfaces/MainView.fxml"));
         Scene newScene = new Scene(newSceneParent);
-        // This line gets the Stage information
+        // This line gets the current Stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(newScene);
         window.show();

@@ -12,6 +12,9 @@ public class Animations {
      *
      * @param button The button to animate.
      */
+    // Declared as static because it's a utility method that doesn't depend
+    // on any instance variables of the Animations class.
+    // It can be called without creating an instance of the Animations class.
     public static void buttonAnimation(Button button) {
         // Create a scale transition
         ScaleTransition st = new ScaleTransition(Duration.millis(100), button);
@@ -21,6 +24,7 @@ public class Animations {
         st.setAutoReverse(true);  // reverse the animation
 
         // Create a flag to indicate whether the animation has finished
+        // Variables used in Lambdas must be "final" so they can't be modified
         final boolean[] animationFinished = {true};
 
         /**
@@ -31,6 +35,16 @@ public class Animations {
          * @param event An ActionEvent which indicates that a set action occurred on a node.
          * This event is passed to the lambda expression, which doesn't use it in this case.
          */
+        // Lambda expression is used as an event handler
+        // It sets the first element in the animationFinished array to true
+        // Indicating that the animation has finished
+        // This is used to prevent multiple animations from running simultaneously
+
+        // Use Lambdas as a reusable piece of code that can be
+        // applied to any Button object to animate it.
+        // Meaning I don't have to write multiple event handlers in the controllers
+        // for each button that needs to be animated.
+        // The compiler will figure out the rest.
         st.setOnFinished(event -> animationFinished[0] = true);
 
         /**
@@ -41,6 +55,8 @@ public class Animations {
          * @param event A MouseEvent which indicates that a mouse action occurred on a node.
          * This event is passed to the lambda expression, which doesn't use it in this case.
          */
+        // Lambda expression is used as an event handler
+        // It checks if the animation has finished
         button.setOnMousePressed(event -> {
             if (animationFinished[0]) {
                 animationFinished[0] = false;

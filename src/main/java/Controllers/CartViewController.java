@@ -32,8 +32,12 @@ public class CartViewController {
     @FXML
     private Button completePurchase;
 
+    // Create an instance variable of the Cart class
+    // It does not initialize the variable, so its value is null by default
     private Cart cart;
 
+    // Create an instance variable of the SFX class
+    // And initialize it
     SFX sfx = new SFX();
 
     /**
@@ -42,7 +46,10 @@ public class CartViewController {
      *
      * @param cart The Cart object to be set.
      */
+    // Void as it does not return anything
     public void setCart(Cart cart) {
+        // Assign the provided Cart object to the cart field
+        // this. is a reference variable that refers to the current object
         this.cart = cart;
         displayCartContents();
     }
@@ -58,9 +65,15 @@ public class CartViewController {
     private void displayCartContents() {
         HBox imageBox = new HBox();
         imageBox.setSpacing(-10);
+        // StringBuilder will allow me to append strings together
+        // StringBuilder is more efficient than using the + operator to concatenate strings
+        // It is mutable, meaning it can be changed
+        // Creating and instantiating a new StringBuilder objects
         StringBuilder cartContents = new StringBuilder();
         StringBuilder cartPrice = new StringBuilder();
         StringBuilder cartTotal = new StringBuilder();
+
+        // foreach loop to iterate over the items in the cart
         for (Items items : cart.getItems()) {
             // Append item name and price separately
             cartContents.append("1x ").append(items.getName()).append("\n");

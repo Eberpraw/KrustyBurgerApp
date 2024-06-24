@@ -18,6 +18,8 @@ public abstract class Items {
      * @param price the price of the item
      * @param image the image of the item
      */
+    // Constructor of the Items class
+    // this. is used to refer to the current object
     public Items(String name, double price, Image image) {
         this.name = name;
         this.price = price;
@@ -38,6 +40,8 @@ public abstract class Items {
      *
      * @param name the new name of the item
      */
+
+    // This method is used to set a new name of the item
     public void setName(String name) {
         this.name = name;
     }
@@ -83,6 +87,8 @@ public abstract class Items {
      *
      * @return a string representation of the item
      */
+    // Using @Override to indicate that this method overrides a method in the Java Objects superclass
+    // This way I could provide a specific implementation of the toString method for the Items class
     @Override
     public String toString() {
         return name + " $" + price;
@@ -93,6 +99,7 @@ public abstract class Items {
      *
      * @param items the item to be added
      */
+    // Ended up not using this method as I intended to use it in the Cart class
     public void add(Items items) {
     }
 }

@@ -17,6 +17,6 @@ public class MainItem extends Items {
      */
     public MainItem(String name, double price, Image image) {
 
-        super(name, price, image);
+        super(name, price, image); // We use super to call the constructor of the Items class
     }
 }

@@ -34,8 +34,10 @@ public class MainViewController {
     @FXML
     private Button previousItemButton;
 
+    // Create an instance variable of the SFX class and initialize it
     SFX sfx = new SFX();
 
+    // Create an array of MainItem objects
     private MainItem[] mainItems = {
             new MainItem("Krusty Burger", 5.99, new Image(getClass().getResource("/Images/KrustyBurgerWCheese.png").toString())),
             new MainItem("Double Krusty Burger", 8.99, new Image(getClass().getResource("/Images/DoubleKrustyBurgerWCheese.png").toString())),
@@ -43,28 +45,35 @@ public class MainViewController {
             new MainItem("Mother Nature Burger", 4.99, new Image(getClass().getResource("/Images/MotherNatureBurger.png").toString()))
     };
 
+    // Create an array of SideItem objects
     private SideItem[] sideItems = {
             new SideItem("Fries", 2.99, new Image(getClass().getResource("/Images/Fries.png").toString())),
             new SideItem("Onion Rings", 3.49, new Image(getClass().getResource("/Images/OnionRings.png").toString())),
             new SideItem("Krusty Loaded Fries", 2.99, new Image(getClass().getResource("/Images/LoadedFries.png").toString()))
     };
 
+    // Create an array of DrinkItem objects
     private DrinkItem[] drinkItems = {
             new DrinkItem("Buzz Cola", 1.99, new Image(getClass().getResource("/Images/BuzzCola.png").toString())),
             new DrinkItem("Mystery Shake", 2.49, new Image(getClass().getResource("/Images/Shake.png").toString())),
             new DrinkItem("Generic Orange Drink", 0.99, new Image(getClass().getResource("/Images/GenericOrangeDrink.png").toString()))
     };
 
+    // Create variables to keep track of the current item index
     private int mainItemIndex;
     private int sideItemIndex;
     private int drinkItemIndex;
 
+    // Create a new variable of type Cart
     private Cart cart;
 
     public void initialize() {
+
         mainItemIndex = 0;
         sideItemIndex = 0;
         drinkItemIndex = 0;
+
+        // Create a new instance of the Cart class
         cart = new Cart();
 
         // Enable automatic line breaks in text
@@ -77,6 +86,7 @@ public class MainViewController {
         addToCartButton.setVisible(true);
         goToCartButton.setVisible(false);
 
+        // Load Animation Class and apply button animation to buttons
         Animations.buttonAnimation(addToCartButton);
         Animations.buttonAnimation(goToCartButton);
         Animations.buttonAnimation(nextItemButton);
@@ -203,18 +213,23 @@ public class MainViewController {
      * @param event The ActionEvent object generated when the "Go to Cart" button is clicked.
      */
     public void openCartView(ActionEvent event) {
+        // Try block contains a set of statements where an exception might occur
         try {
             sfx.playSoundEffect("AudioFiles/KrustyLaugh.wav");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/CartView.fxml"));
             Parent newSceneParent = loader.load();
             Scene newScene = new Scene(newSceneParent);
 
+            // We use this to parse the cart value to the next scene
             CartViewController controller = loader.getController();
             controller.setCart(cart);
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(newScene);
             window.show();
+        // If something goes wrong in the try block, the catch
+        // block will catch the exception and handle it
+        // IOException is checking exceptions in relation to input/output operations
         } catch (IOException e) {
             sfx.playSoundEffect("AudioFiles/Crap.wav");
             e.printStackTrace();
